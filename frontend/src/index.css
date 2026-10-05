@@ -1,0 +1,98 @@
+:root {
+  /* Campus Customs design tokens -- a New Haven-autumn palette: Yale blue
+     anchored by warm parchment, pumpkin, and ivy, instead of flat gray. */
+  --ink: #0d2b4e;
+  --ink-soft: #46505c;
+  --yale-blue: #00356b;
+  --yale-blue-deep: #04213f;
+  --parchment: #faf5ec;
+  --parchment-deep: #f1e7d6;
+  --pumpkin: #bf5b30;
+  --ivy: #3c6349;
+  --gold: #c9a227;
+  --gold-light: #e0b934;
+  --line: #e4d9c4;
+
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Inter", system-ui, "Segoe UI", Roboto, sans-serif;
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --shadow-soft: 0 2px 12px rgba(13, 43, 78, 0.08);
+  --shadow-lift: 0 18px 36px rgba(13, 43, 78, 0.16);
+
+  font: 16px/1.55 var(--font-body);
+  color-scheme: light;
+  color: var(--ink-soft);
+  background: var(--parchment);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+h1 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+h2 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+/* A short, understated rise + fade used throughout for page/card entrances
+   -- never a flashy animation, just enough motion to feel considered.
+   Stagger multiple items with the --rise-delay custom property (ms). */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rise-in {
+  animation: rise-in 0.6s cubic-bezier(0.16, 0.84, 0.44, 1) both;
+  animation-delay: calc(var(--rise-delay, 0) * 1ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise-in {
+    animation: none;
+  }
+}

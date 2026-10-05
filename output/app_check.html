@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Campus Customs — HW4 App Check</title>
+<style>
+  :root {
+    --ink: #0d2b4e;
+    --ink-soft: #46505c;
+    --yale-blue: #00356b;
+    --parchment: #faf5ec;
+    --parchment-deep: #f1e7d6;
+    --pumpkin: #bf5b30;
+    --ivy: #3c6349;
+    --gold: #c9a227;
+    --line: #e4d9c4;
+  }
+  body {
+    font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--parchment);
+    color: var(--ink-soft);
+    margin: 0;
+    padding: 0 0 4rem;
+  }
+  header {
+    background: var(--yale-blue);
+    color: #fff;
+    padding: 2rem 2rem 1.5rem;
+    border-bottom: 3px solid var(--gold);
+  }
+  header h1 {
+    margin: 0 0 0.4rem;
+    font-size: 1.6rem;
+  }
+  header p {
+    margin: 0;
+    color: #cfdcec;
+    font-size: 0.95rem;
+  }
+  main {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  .intro {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 1.1rem 1.4rem;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+  }
+  .intro ul {
+    margin: 0.5rem 0 0;
+    padding-left: 1.3rem;
+  }
+  .check {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 10px rgba(13, 43, 78, 0.06);
+  }
+  .check h2 {
+    color: var(--ink);
+    margin: 0 0 0.3rem;
+    font-size: 1.2rem;
+  }
+  .check .badge {
+    display: inline-block;
+    background: var(--parchment-deep);
+    color: var(--pumpkin);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    margin-bottom: 0.6rem;
+  }
+  .check .asked {
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    margin: 0 0 0.9rem;
+  }
+  .check .asked code {
+    background: var(--parchment-deep);
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+  }
+  .check img {
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    display: block;
+    margin-bottom: 0.8rem;
+  }
+  .check .proves {
+    font-size: 0.92rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+  .proves strong {
+    color: var(--ink);
+  }
+  .status-ok {
+    color: var(--ivy);
+    font-weight: 700;
+  }
+  footer {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  footer .check h2 {
+    font-size: 1.05rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Campus Customs — HW4 App Check</h1>
+  <p>Problem 11: live verification of the running app (frontend at localhost:5173, backend at localhost:8000), with real screenshots captured via an automated browser script against the actual running servers.</p>
+</header>
+
+<main>
+  <div class="intro">
+    <p>Each check below: a heading describing what's being tested, a real screenshot of the running app, and 1–2 sentences on exactly what the screenshot proves.</p>
+    <ul>
+      <li>All data shown (prices, stock, product names) comes live from <code>campus_customs.db</code> through the FastAPI backend — nothing here is mocked.</li>
+      <li>Screenshots were captured with a scripted browser (Playwright) driving the real app, the same way a shopper would use it.</li>
+    </ul>
+  </div>
+
+  <div class="check">
+    <span class="badge">Check 1 of 3</span>
+    <h2>Chat — Honest Inventory &amp; Price Check</h2>
+    <p class="asked">Asked the chat assistant: <code>"How much is the Baseball Left Chest Crewneck and do you have it in size XS?"</code></p>
+    <img src="app_check_images/inventory_check.png" alt="Chat answering a price and stock question honestly from the database" />
+    <p class="proves"><span class="status-ok">✓ Proven:</span> the agent answered <strong>$58.00</strong> (the real catalogue price) and said size <strong>XS is sold out</strong>, listing <strong>S, M, L, and XXL</strong> as available — this matches the real <code>inventory</code> table exactly (XS quantity = 0), confirming the agent reads real stock/price via its tools (<code>get_product_card</code>, <code>check_stock</code>) instead of guessing.</p>
+  </div>
+
+  <div class="check">
+    <span class="badge">Check 2 of 3</span>
+    <h2>Dynamic Search-Result Cards for a Category Question</h2>
+    <p class="asked">Asked the chat assistant: <code>"What hoodies do you have?"</code></p>
+    <img src="app_check_images/search_results.png" alt="Chat triggering dynamic product cards on the page after a category question" />
+    <p class="proves"><span class="status-ok">✓ Proven:</span> the agent's <code>search_catalogue</code> tool found 5 real hoodies, and the website dynamically rendered a <strong>"Chat found 5 products..."</strong> panel with full product cards (image, name, price, short description) directly on the page — not just inside the chat bubble — and the chat reply itself stayed short ("Here are our Yale hoodies!") plus offered follow-up suggestion chips.</p>
+  </div>
+
+  <div class="check">
+    <span class="badge">Check 3 of 3</span>
+    <h2>Usability Feature — Category Filter + Price Sort (Problem 9)</h2>
+    <p class="asked">On the Products page: clicked the <code>Hoodies</code> filter chip, then set sort to <code>Price: Low to High</code>.</p>
+    <img src="app_check_images/usability_filter.png" alt="Products page filtered to hoodies and sorted by price ascending" />
+    <p class="proves"><span class="status-ok">✓ Proven:</span> the 102-product catalogue correctly narrows to <strong>27 hoodies</strong> (chip shows the live count and highlights active), and the grid re-orders by ascending price ($45, $45, $68, $68, …) — confirming the filter and sort usability improvement from Problem 9 actually works in the running app, not just in code.</p>
+  </div>
+
+  <div class="check">
+    <span class="badge">Also checked</span>
+    <h2>Prompt Log Accuracy</h2>
+    <p class="proves">Re-read <code>AI_prompts.md</code> end-to-end for Problems 1–10: every section follows the same structure (problem number/title, prompt typed, follow-up, what was lacking, outcome), each quoted prompt matches what was actually typed, and the file builds up consistently problem-by-problem with no missing or malformed sections. <span class="status-ok">No corrections were needed.</span></p>
+  </div>
+</main>
+
+</body>
+</html>

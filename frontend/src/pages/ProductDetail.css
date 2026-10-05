@@ -1,0 +1,145 @@
+.product-detail {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+
+@media (max-width: 760px) {
+  .product-detail {
+    grid-template-columns: 1fr;
+  }
+}
+
+.product-detail-image {
+  background: var(--parchment-deep);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  box-shadow: var(--shadow-soft);
+}
+
+.product-detail-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.back-link {
+  display: inline-block;
+  color: var(--yale-blue);
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.product-detail-info h1 {
+  font-size: 1.9rem;
+  color: var(--ink);
+  margin: 0 0 0.5rem;
+}
+
+.product-detail-price {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--pumpkin);
+  margin: 0 0 0.25rem;
+}
+
+.product-detail-type {
+  color: var(--ink-soft);
+  margin: 0 0 1.25rem;
+  font-style: italic;
+}
+
+.product-detail-desc {
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+.product-detail-section {
+  margin-top: 1.5rem;
+}
+
+.product-detail-section h2 {
+  font-size: 1rem;
+  color: var(--ink);
+  margin-bottom: 0.6rem;
+}
+
+.color-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.color-swatch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.3rem 0.7rem 0.3rem 0.3rem;
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+
+.swatch-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
+}
+
+.size-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.5rem;
+}
+
+.size-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  background: var(--parchment-deep);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+}
+
+.size-list li::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ivy);
+  margin-right: 0.4rem;
+}
+
+.size-list li.out-of-stock {
+  opacity: 0.55;
+}
+
+.size-list li.out-of-stock::before {
+  background: var(--pumpkin);
+}
+
+.size-label {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.product-detail-status {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  color: #555;
+}

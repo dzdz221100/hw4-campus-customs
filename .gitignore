@@ -1,0 +1,18 @@
+# Secrets -- never commit the real .env (see .env.example for the template)
+.env
+
+# Local-only data pack (campus_customs.db + product images).
+# Not committed -- add your own copy locally before running the backend.
+data/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Node / frontend build output
+frontend/node_modules/
+frontend/dist/
+
+# OS
+.DS_Store
